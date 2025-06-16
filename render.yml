@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nba-analytics-api
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: APP_NAME
+        value: "NBA Analytics API"
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: "sqlite:///./nba_data.db"
+      - key: REDIS_ENABLED
+        value: "false"
+      - key: RATE_LIMIT_CALLS
+        value: "100"
+      - key: RATE_LIMIT_PERIOD
+        value: "60"
